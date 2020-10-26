@@ -32,11 +32,16 @@ namespace RgpGame.Controllers
             return Ok(await _service.GetSingle(id));
         }
 
-        [Authorize]
+        /// <summary>
+        /// Get all characters's infomation of user
+        /// </summary>
+        /// <returns></returns>
         [Route("GetAll")]
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
+            System.Console.WriteLine(User.Claims);
             int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
             return Ok(await _service.GetAllCharacter(userId));
         }
