@@ -21,6 +21,8 @@ using System.Reflection;
 using System.IO;
 using RgpGame.Config.Swagger;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Http;
+using RgpGame.Services.WeaponService;
 
 namespace RgpGame
 {
@@ -52,7 +54,7 @@ namespace RgpGame
             });
 
             services.AddDbContext<DataContext>(optBuilder => optBuilder.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection")));
+                Configuration.GetConnectionString("DockerConnection")));
 
             services.AddControllers();
 
@@ -60,9 +62,11 @@ namespace RgpGame
 
             services.AddScoped<ICharacterService, CharacterService>();
 
+            services.AddScoped<IWeaponService, WeaponService>();
+
             services.AddScoped<IAuthRepository, AuthRepository>();
 
-            // services.AddMvc();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddSwaggerGen(c =>
             {

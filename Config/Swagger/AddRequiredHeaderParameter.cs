@@ -12,31 +12,7 @@ namespace RgpGame.Config.Swagger
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            // var methodCustomAttributes = context.MethodInfo.CustomAttributes;
-            // var isAuthorized = methodCustomAttributes.Any(attribute => attribute.AttributeType == typeof(AuthorizeAttribute));
-            // // var allowAnonymous = filterPipeline.Select(info => info.Filter).Any(filter => filter is AllowAnonymousFilter);
 
-            // if (!isAuthorized) return;
-
-            // if (operation.Parameters == null)
-            // {
-            //     operation.Parameters = new List<OpenApiParameter>();
-            // }
-
-            // operation.Parameters.Add(new OpenApiParameter
-            // {
-            //     Name = "Authorization",
-            //     In = ParameterLocation.Header,
-            //     Description = "access token",
-            //     Required = true,
-            //     Schema = new OpenApiSchema
-            //     {
-            //         Type = "string",
-            //         Default = new OpenApiString("Bearer "),
-            //     },
-            // });
-
-             // Policy names map to scopes
             var requiredScopes = context.MethodInfo
                 .GetCustomAttributes(true)
                 .OfType<AuthorizeAttribute>()

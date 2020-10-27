@@ -27,6 +27,7 @@ namespace RgpGame.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<IActionResult> GetSingle(int id)
         {
             return Ok(await _service.GetSingle(id));
@@ -41,9 +42,7 @@ namespace RgpGame.Controllers
         [Authorize]
         public async Task<IActionResult> Get()
         {
-            System.Console.WriteLine(User.Claims);
-            int userId = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            return Ok(await _service.GetAllCharacter(userId));
+            return Ok(await _service.GetAllCharacters());
         }
 
         /// <summary>
@@ -67,12 +66,14 @@ namespace RgpGame.Controllers
         /// <returns>A list of current characters of user</returns>
         /// <response code="200">Add new user successfully</response>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddCharacter([FromBody] AddCharacterDto newCharacter)
         {
             return Ok(await _service.AddCharacter(newCharacter));
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> UpdateCharacter([FromBody] UpdateCharacterDto character)
         {
             var response = await _service.UpdateCharacter(character);
@@ -81,6 +82,7 @@ namespace RgpGame.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteCharacter(int id)
         {
             var response = await _service.DeleteCharacter(id);
