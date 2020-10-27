@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RgpGame.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeaponController : ControllerBase
@@ -17,6 +16,7 @@ namespace RgpGame.Controllers
             _service = service;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddWeapon(AddWeaponDto newWeapon)
         {

@@ -23,6 +23,7 @@ using RgpGame.Config.Swagger;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http;
 using RgpGame.Services.WeaponService;
+using RgpGame.Services.CharacterSkillService;
 
 namespace RgpGame
 {
@@ -63,6 +64,8 @@ namespace RgpGame
             services.AddScoped<ICharacterService, CharacterService>();
 
             services.AddScoped<IWeaponService, WeaponService>();
+
+            services.AddScoped<ICharacterSkillService, CharacterSkillService>();
 
             services.AddScoped<IAuthRepository, AuthRepository>();
 

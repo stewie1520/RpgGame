@@ -16,6 +16,8 @@ namespace RgpGame.Data
         public DbSet<Weapon> Weapons { get; set; }
         public DbSet<CharacterSkill> CharacterSkills { get; set; }
 
+        public DbSet<Skill> Skills { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<CharacterSkill>()
